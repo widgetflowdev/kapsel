@@ -1,7 +1,7 @@
-# @widgetflow/capsule
+# @widgetflow/kapsel
 
-[![npm version](https://badge.fury.io/js/@widgetflow%2Fcapsule.svg)](https://badge.fury.io/js/@widgetflow%2Fcapsule)
-[![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/widgetflowdev/capsule/blob/main/LICENSE)
+[![npm version](https://badge.fury.io/js/@widgetflow%2Fkapsel.svg)](https://badge.fury.io/js/@widgetflow%2Fkapsel)
+[![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/widgetflowdev/kapsel/blob/main/LICENSE)
 [![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![Built with Vite](https://img.shields.io/badge/Built%20with-Vite-646CFF?logo=vite&logoColor=white)](https://vitejs.dev/)
 
@@ -22,11 +22,11 @@ Perfect for embedding components across different applications without style con
 ## 📦 Installation
 
 ```bash
-npm install @widgetflow/capsule
+npm install @widgetflow/kapsel
 # or
-pnpm add @widgetflow/capsule
+pnpm add @widgetflow/kapsel
 # or  
-yarn add @widgetflow/capsule
+yarn add @widgetflow/kapsel
 ```
 
 ## 🚀 Quick Start
@@ -34,7 +34,7 @@ yarn add @widgetflow/capsule
 ### Vue 3
 
 ```ts
-import { defineIsolatedVue } from '@widgetflow/capsule/vue'
+import { defineIsolatedVue } from '@widgetflow/kapsel/vue'
 import MyWidget from './MyWidget.vue'
 
 // Register as a custom element
@@ -49,7 +49,7 @@ customElements.define('my-widget', defineIsolatedVue(() => MyWidget))
 ### React
 
 ```tsx
-import { defineIsolatedReact } from '@widgetflow/capsule/react'
+import { defineIsolatedReact } from '@widgetflow/kapsel/react'
 import MyWidget from './MyWidget'
 
 customElements.define('my-widget', defineIsolatedReact(() => MyWidget))
@@ -58,9 +58,9 @@ customElements.define('my-widget', defineIsolatedReact(() => MyWidget))
 ### Vanilla JavaScript
 
 ```ts
-import { createCapsule } from '@widgetflow/capsule'
+import { createKapsel } from '@widgetflow/kapsel'
 
-const widget = createCapsule({
+const widget = createKapsel({
   template: '<div>Hello, World!</div>',
   styles: 'div { color: blue; }'
 })
@@ -76,11 +76,11 @@ Add seamless development experience:
 
 ```ts
 // vite.config.ts
-import { capsulePlugin } from '@widgetflow/capsule/vite'
+import { kapselPlugin } from '@widgetflow/kapsel/vite'
 
 export default {
   plugins: [
-    capsulePlugin({
+    kapselPlugin({
       // Auto-register components
       autoRegister: true,
       // Custom element prefix
@@ -131,7 +131,7 @@ const handleClick = () => {
 
 ```ts
 // register.ts
-import { defineIsolatedVue } from '@widgetflow/capsule/vue'
+import { defineIsolatedVue } from '@widgetflow/kapsel/vue'
 import MyWidget from './MyWidget.vue'
 
 const WidgetElement = defineIsolatedVue(() => MyWidget, {
@@ -150,12 +150,12 @@ customElements.define('my-widget', WidgetElement)
 
 ### Core API
 
-#### `createCapsule(options)`
+#### `createKapsel(options)`
 
 Creates a base web component with Shadow DOM isolation.
 
 ```ts
-interface CapsuleOptions {
+interface KapselOptions {
   template: string | HTMLElement
   styles?: string | CSSStyleSheet[]
   shadowMode?: 'open' | 'closed'
@@ -200,8 +200,8 @@ interface ReactOptions {
 ### Setup
 
 ```bash
-git clone https://github.com/widgetflowdev/capsule.git
-cd capsule
+git clone https://github.com/widgetflowdev/kapsel.git
+cd kapsel
 pnpm install
 ```
 
