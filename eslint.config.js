@@ -7,15 +7,59 @@ export default [
   // Base JavaScript recommended rules
   js.configs.recommended,
   
-  // TypeScript files configuration
+  // Test files configuration (must come before general TypeScript config)
   {
-    files: ['**/*.ts', '**/*.tsx'],
+    files: ['**/*.test.ts', '**/*.test.tsx', '**/tests/**/*.ts'],
+    languageOptions: {
+      parser: tsparser,
+      parserOptions: {
+        ecmaVersion: 'latest',
+        sourceType: 'module'
+        // Don't require project for test files to avoid tsconfig conflicts
+      },
+      globals: {
+        // Test globals
+        describe: 'readonly',
+        it: 'readonly',
+        expect: 'readonly',
+        vi: 'readonly',
+        // Browser globals for tests
+        document: 'readonly',
+        window: 'readonly',
+        console: 'readonly',
+        customElements: 'readonly',
+        HTMLElement: 'readonly'
+      }
+    },
+    plugins: {
+      '@typescript-eslint': tseslint
+    },
+    rules: {
+      ...tseslint.configs.recommended.rules,
+      '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
+      'no-console': 'off' // Allow console in tests
+    }
+  },
+  
+  // TypeScript files configuration (excluding test files)
+  {
+    files: ['src/**/*.ts', 'src/**/*.tsx'],
     languageOptions: {
       parser: tsparser,
       parserOptions: {
         ecmaVersion: 'latest',
         sourceType: 'module',
         project: './tsconfig.json'
+      },
+      globals: {
+        // Browser globals
+        document: 'readonly',
+        window: 'readonly',
+        console: 'readonly',
+        customElements: 'readonly',
+        HTMLElement: 'readonly',
+        // React globals
+        React: 'readonly'
       }
     },
     plugins: {
@@ -24,18 +68,12 @@ export default [
     rules: {
       ...tseslint.configs.recommended.rules,
       
-      // Custom TypeScript rules
+      // Custom rules that are compatible with v8
       '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
       '@typescript-eslint/no-explicit-any': 'warn',
-      '@typescript-eslint/explicit-function-return-type': 'off',
-      '@typescript-eslint/explicit-module-boundary-types': 'off',
-      '@typescript-eslint/no-non-null-assertion': 'warn',
-      '@typescript-eslint/prefer-const': 'error',
-      '@typescript-eslint/no-var-requires': 'error',
-      
-      // General rules
       'no-console': 'warn',
-      'no-debugger': 'error'
+      'no-debugger': 'error',
+      'no-undef': 'error'
     }
   },
   
@@ -44,7 +82,11 @@ export default [
     files: ['**/*.js', '**/*.mjs', '**/*.cjs'],
     languageOptions: {
       ecmaVersion: 'latest',
-      sourceType: 'module'
+      sourceType: 'module',
+      globals: {
+        console: 'readonly',
+        process: 'readonly'
+      }
     }
   },
   
